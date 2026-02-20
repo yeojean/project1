@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Square Spiral Text — Depth</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="spiral-screen">
+    <div id="canvas"></div>
+    <div class="enter-portal" id="enterPortal"></div>
+    <div id="centerClick"></div>
+    <div class="timer" id="timer">0:00</div>
+    <div class="controls">
+      <button id="playPauseBtn" title="Pause">
+        <svg id="pauseIcon" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        <svg id="playIcon" viewBox="0 0 24 24" style="display:none;"><polygon points="6,4 20,12 6,20"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="menu-screen">
+    <div id="mouseGlow"></div>
+    <div class="menu-container">
+      <div class="menu-rect" data-page="garden">
+        <span class="menu-label">The Garden of<br>Forking Paths</span>
+      </div>
+      <div class="menu-rect" data-page="sand">
+        <span class="menu-label">The Book<br>of Sand</span>
+      </div>
+      <div class="menu-rect" data-page="ruins">
+        <span class="menu-label">The Circular<br>Ruins</span>
+      </div>
+      <div class="overlap-glow" id="overlapGlow"></div>
+    </div>
+  </div>
+  <div id="overlap-prelude-screen" class="text-screen">
+    <canvas id="overlapPreludeCanvas"></canvas>
+  </div>
+  <div id="overlap-screen" class="text-screen">
+    <div class="door-scene">
+      <div class="door-poster">
+        <div class="door-grid">
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+          <button class="door-tile" type="button" aria-label="Open mixed text"><span class="door-leaf"></span></button>
+        </div>
+      </div>
+    </div>
+    <button class="page-back-btn" id="overlapBack">&larr; back</button>
+  </div>
+  <div id="mixed-screen" class="text-screen">
+    <div id="mixedNoise" aria-hidden="true"></div>
+    <div id="mixedStage">
+      <p id="mixedText"></p>
+    </div>
+    <button class="page-back-btn" id="mixedBack">&larr; back</button>
+  </div>
+  <div id="wave-screen" class="text-screen">
+    <canvas id="waveCanvas"></canvas>
+    <button class="page-back-btn" id="waveBack">&larr; back</button>
+  </div>
+  <div id="glyph-screen" class="text-screen">
+    <canvas id="glyphCanvas"></canvas>
+    <button class="page-back-btn" id="glyphBack">&larr; back</button>
+  </div>
+  <div id="frames-screen" class="text-screen">
+    <canvas id="framesCanvas"></canvas>
+    <button class="page-back-btn" id="framesBack">&larr; back</button>
+  </div>
+  <div id="garden-screen" class="text-screen">
+    <div id="gardenScroller">
+      <div id="gardenPage1"><canvas id="gardenCanvas"></canvas></div>
+      <div id="gardenPage2">
+        <div id="gardenWords">
+          <p id="gardenQuote">
+            “In a guessing game to which the answer is chess, which word is the only one prohibited? I thought for a moment and then replied: 'The word is chess.' 'Precisely,' said Albert. 'The Garden of Forking Paths is an enormous guessing game, or parable, in which the subject is time. The rules of the game forbid the use of the word itself. To eliminate a word completely, to refer to it by means of inept phrases and obvious paraphrases, is perhaps the best way of drawing attention to it. This, then, is the tortuous method of approach preferred by the oblique Ts'ui Pen in every meandering of his interminable novel.'”
+          </p>
+          <p id="gardenNow">Everything Happens Now</p>
+        </div>
+      </div>
+    </div>
+    <button class="page-back-btn" id="gardenBack">&larr; back</button>
+  </div>
+  <div id="sand-screen" class="text-screen">
+    <canvas id="sandFxCanvas"></canvas>
+    <canvas id="sandCanvas"></canvas>
+    <canvas id="clockCanvas"></canvas>
+    <div id="sandFeuOverlay" aria-hidden="true"></div>
+    <button id="sandContinueBtn" aria-label="Continue"></button>
+    <div id="sandFlash"></div>
+    <button class="page-back-btn" id="sandBack">&larr; back</button>
+  </div>
+  <div id="ruins-screen" class="text-screen">
+    <canvas id="ruinsCanvas"></canvas>
+    <div id="ruinsGifOverlay" aria-hidden="true">
+      <img
+        id="ruinsGif"
+        src="https://i.pinimg.com/originals/e8/69/bd/e869bd07112262f2bca23e0cd4489bfd.gif"
+        alt="Circular Ruins portal"
+      >
+    </div>
+    <button class="page-back-btn" id="ruinsBack">&larr; back</button>
+  </div>
+  <button class="back-btn" id="backBtn">&larr; back</button>
+  <script src="script.js"></script>
+</body>
+</html>
